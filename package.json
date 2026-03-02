@@ -14,8 +14,8 @@
   },
   "lint-staged": {
   "src/*.{ts,tsx}": [
-    "biome check --write"
-  ]
+      "biome check --write"
+    ]
   },
   "dependencies": {
     "react": "^19.2.0",

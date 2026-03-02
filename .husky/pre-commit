@@ -1,1 +1,1 @@
-npx biome format
+npx lint-staged
