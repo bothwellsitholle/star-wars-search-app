@@ -1,0 +1,176 @@
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Sora:wght@300;400;500;600;700&family=Poppins:wght@400;500;600&display=swap");
+@plugin "tailwindcss-animate";
+
+@theme {
+  --color-brand-deepest: #0e0820;
+  --color-brand-dark: #1a0f2e;
+  --color-brand-medium: #2d1f50;
+  --color-brand-elevated: #3a2b62;
+  --color-brand-border: #4c3a7a;
+  --color-brand-accent: #7c6fe0;
+  --color-brand-accent-light: #a599eb;
+  --color-brand-accent-hover: #6357c8;
+  --color-brand-muted: #9d91c8;
+  --color-brand-light: #e8e4f4;
+  --color-brand-lightest: #f2f0fd;
+  --color-brand-error: #ff6b6b;
+  --color-brand-error-dark: #e04545;
+  --color-brand-star: #e8b84b;
+
+  --font-family-space-grotesk: "Space Grotesk", sans-serif;
+  --font-family-sora: "Sora", sans-serif;
+  --font-family-poppins: "Poppins", sans-serif;
+
+  --animate-fade-in: fadeIn 0.2s ease-in-out;
+  --animate-slide-down: slideDown 0.18s ease-out;
+  --animate-slide-up: slideUp 0.18s ease-out;
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes slideDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes slideUp {
+    0% {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Theme system (CSS custom properties) */
+/*
+ * Light mode — defaults. Applied when [data-theme="light"] or :root with no attr.
+ * Dark mode  — overrides when [data-theme="dark"].
+ * The Navbar and Hero always stay dark; only the content body switches.
+ */
+:root,
+[data-theme="light"] {
+  --theme-bg-body: #f2f0fd;
+  --theme-bg-card: #ffffff;
+  --theme-bg-elevated: #eceaf8;
+  --theme-bg-input: #ffffff;
+  --theme-text-primary: #1a0f2e;
+  --theme-text-secondary: #3a2b62;
+  --theme-text-muted: #7b6fa8;
+  --theme-border: rgba(76, 58, 122, 0.18);
+  --theme-shadow: rgba(76, 58, 122, 0.12);
+  --theme-hover: rgba(124, 111, 224, 0.07);
+  --theme-skeleton: rgba(76, 58, 122, 0.12);
+}
+
+[data-theme="dark"] {
+  --theme-bg-body: #0e0820;
+  --theme-bg-card: #1a0f2e;
+  --theme-bg-elevated: #2d1f50;
+  --theme-bg-input: #f2f0fd;
+  --theme-text-primary: #e8e4f4;
+  --theme-text-secondary: #b8b0d8;
+  --theme-text-muted: rgba(157, 145, 200, 0.65);
+  --theme-border: rgba(124, 111, 224, 0.2);
+  --theme-shadow: rgba(0, 0, 0, 0.4);
+  --theme-hover: rgba(124, 111, 224, 0.12);
+  --theme-skeleton: rgba(124, 111, 224, 0.15);
+}
+
+@layer utilities {
+  .bg-theme-body {
+    background-color: var(--theme-bg-body);
+  }
+  .bg-theme-card {
+    background-color: var(--theme-bg-card);
+  }
+  .bg-theme-elevated {
+    background-color: var(--theme-bg-elevated);
+  }
+  .bg-theme-input {
+    background-color: var(--theme-bg-input);
+  }
+  .text-theme-primary {
+    color: var(--theme-text-primary);
+  }
+  .text-theme-secondary {
+    color: var(--theme-text-secondary);
+  }
+  .text-theme-muted {
+    color: var(--theme-text-muted);
+  }
+  .border-theme {
+    border-color: var(--theme-border);
+  }
+  .shadow-theme {
+    box-shadow: 0 4px 24px var(--theme-shadow);
+  }
+  .hover-theme:hover {
+    background-color: var(--theme-hover);
+  }
+
+  .hero-pattern {
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(124, 111, 224, 0.25) 0%, transparent 70%),
+      radial-gradient(circle, rgba(124, 111, 224, 0.12) 1px, transparent 1px);
+    background-size:
+      100% 100%,
+      22px 22px;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #0e0820;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--theme-bg-body);
+  color: var(--theme-text-primary);
+  min-height: 100vh;
+  margin: 0;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: var(--theme-bg-elevated);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #7c6fe0;
+  border-radius: 2px;
+}
