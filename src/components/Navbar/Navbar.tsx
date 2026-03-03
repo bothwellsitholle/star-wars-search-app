@@ -27,7 +27,7 @@ export const Navbar = () => {
           >
             {theme === Theme.Dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
           </button>
-          
+
           <span className="hidden font-sora text-[10px] font-semibold tracking-[0.2em] text-white/40 sm:block">
             THEME
           </span>
