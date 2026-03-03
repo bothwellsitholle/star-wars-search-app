@@ -1,75 +1,85 @@
-# star-wars-search-app
+# SWAPI Character Search
 
-## React + TypeScript + Vite
+A Star Wars character search platform built with React 19 + TypeScript. Type a name into the search box and get live suggestions pulled from the [SWAPI](https://swapi.dev) API — click or keyboard-select one to see their details.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+## What it does
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Suggestions appear after 2 characters, debounced at 300ms so the API isn't hammered on every keystroke
+- In-flight requests are cancelled automatically when the query changes (no stale results overwriting fresh ones)
+- Full keyboard support: arrow keys to navigate, Enter to select, Escape to close
+- Click outside the dropdown to dismiss it
+- Matched text is bolded in each suggestion
+- Character details (height, mass, birth year, etc.) show below the search box after selection
+- Loading skeletons, empty state, and error messages are all handled
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech stack
 
-## Expanding the ESLint configuration
+- **React 19 + TypeScript** (strict)
+- **Vite 7** — dev server and production build with gzip compression
+- **TanStack Query v5** — handles caching, deduplication, and passes the abort signal to Axios
+- **TanStack Router** — client-side routing with a typed 404 fallback
+- **Axios** — HTTP client; the abort signal from TanStack Query is forwarded straight through
+- **Zod** — validates the API response at runtime so a SWAPI schema change surfaces immediately as an error rather than broken UI
+- **Tailwind CSS v4** — custom brand theme defined in `@theme`
+- **Biome** — linting and formatting in one tool
+- **Vitest + Testing Library + MSW** — unit/integration tests with a mock API server (no real network calls in tests)
+- **Playwright** — E2E smoke tests against the running dev server
+- **Husky + lint-staged** — runs Biome on staged files before every commit
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Getting started
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+You'll need Node 18+ and npm installed.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+# Clone the repo and install dependencies
+npm install
+
+# Start the dev server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The app will be available at `http://localhost:5173`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Running the tests
+
+```bash
+# Run the unit/integration test suite once
+npm test
+
+# Watch mode — reruns affected tests as you edit
+npm run test:watch
+
+# Coverage report
+npm run test:coverage
 ```
+
+For E2E tests you need the dev server running in a separate terminal first:
+
+```bash
+# Terminal 1
+npm run dev
+
+# Terminal 2
+npm run test:e2e
+```
+
+---
+
+## A few implementation notes
+
+**Request cancellation** — TanStack Query exposes a `signal` on the `QueryFunctionContext`. That signal gets passed directly to Axios, so when the debounced query key changes mid-flight, the previous HTTP request is cancelled at the network level. This prevents a slow response for `"lu"` from landing after a faster response for `"luk"` and overwriting it.
+
+**Debounce placement** — The debounce sits between the raw input state and the query key, not inside the query itself. This means TanStack Query only registers a new query after the user pauses, which keeps the cache clean and avoids unnecessary re-renders.
+
+**Zod validation** — Every API response goes through `SwapiPeopleResponseSchema.parse()` before any component touches the data. If SWAPI ever changes the shape of its response, the app throws an error that's caught by the error boundary rather than silently rendering `undefined` fields.
+
+---
+
