@@ -148,7 +148,7 @@ export const CharacterSearch = () => {
         )}
 
         {!selectedCharacter && (
-          <p className="mt-6 pb-12 text-center text-xs text-theme-muted">
+          <p className="mt-6 pb-12 text-center text-xs text-purple-200">
             Type 2+ characters to search · Select a result to view details
           </p>
         )}

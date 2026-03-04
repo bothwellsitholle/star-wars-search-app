@@ -34,7 +34,7 @@ A Star Wars character search platform built with React 19 + TypeScript. Type a n
 
 ## Getting started
 
-You'll need Node 18+ and npm installed.
+You'll need Node 22.12.0 and npm installed.
 
 ```bash
 # Clone the repo and install dependencies

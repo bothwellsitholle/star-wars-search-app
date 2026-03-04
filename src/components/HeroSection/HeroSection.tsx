@@ -14,7 +14,7 @@ export const HeroSection = () => (
       className="fixed inset-0 z-0 hidden bg-cover bg-right-top sm:block"
       style={{ backgroundImage: `url(${heroBgDesktop})` }}
     />
-    <div aria-hidden="true" className="hero-pattern fixed inset-0 z-0 bg-[#1A0F2E]/65" />
+    <div aria-hidden="true" className="hero-pattern fixed inset-0 z-0 bg-[#1A0F2E]/35" />
 
     <div className="mx-auto max-w-2xl px-4">
       <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-brand-star/25 bg-brand-star/10 px-3.5 py-1 text-[11px] font-semibold tracking-[0.15em] text-brand-star">

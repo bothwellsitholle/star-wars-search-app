@@ -13,7 +13,7 @@ export const ThemeContext = createContext<ThemeContextValue | null>(null);
 const getInitialTheme = (): Theme => {
   const stored = localStorage.getItem(THEME_STORAGE_KEY);
   if (stored === Theme.Light || stored === Theme.Dark) return stored;
-  return Theme.Dark;
+  return Theme.Light;
 };
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
