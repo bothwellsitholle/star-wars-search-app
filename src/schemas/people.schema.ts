@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+// Zod schema for a single Star Wars person from SWAPI.
 export const PersonSchema = z.object({
   name: z.string(),
   height: z.string(),

@@ -7,6 +7,10 @@ interface LazyImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   placeholderClassName?: string;
 }
 
+/**
+ * Image wrapper that uses the native `loading="lazy"` browser attribute
+ * and fades in once the image has loaded, avoiding layout shift.
+ */
 export const LazyImage = ({
   src,
   alt,
