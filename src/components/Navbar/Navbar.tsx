@@ -23,7 +23,7 @@ export const Navbar = () => {
             type="button"
             onClick={toggleTheme}
             aria-label={`Switch to ${theme === Theme.Dark ? Theme.Light : Theme.Dark} mode`}
-            className="flex h-8 w-8 items-center justify-center rounded-full text-white/80 transition-all hover:bg-white/10 hover:text-white focus-visible:outline-2 focus-visible:outline-brand-accent"
+            className="flex h-8 w-8 items-center justify-center cursor-pointer rounded-full text-white/80 transition-all hover:bg-white/10 hover:text-white focus-visible:outline-2 focus-visible:outline-brand-accent"
           >
             {theme === Theme.Dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
           </button>

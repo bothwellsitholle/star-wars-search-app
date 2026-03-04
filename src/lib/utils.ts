@@ -1,7 +1,7 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
-// This func merges Tailwind class names and resolves conflicts automatically 
+// This func merges Tailwind class names and resolves conflicts automatically
 export const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 
 // This func separates text so the matching portion can be highlighted.
