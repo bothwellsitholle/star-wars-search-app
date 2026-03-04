@@ -6,25 +6,25 @@ A Star Wars character search platform built with React 19 + TypeScript. Type a n
 
 ## What it does
 
-- Suggestions appear after 2 characters, debounced at 300ms so the API isn't hammered on every keystroke
-- In-flight requests are cancelled automatically when the query changes (no stale results overwriting fresh ones)
+- Suggestions appear after 2 characters, they debounced at 300ms so the API isn't hammered on every keystroke
+- In-flight requests are cancelled automatically when the query changes so no stale results overwriting fresh ones
 - Full keyboard support: arrow keys to navigate, Enter to select, Escape to close
 - Click outside the dropdown to dismiss it
 - Matched text is bolded in each suggestion
-- Character details (height, mass, birth year, etc.) show below the search box after selection
+- Character details show below the search box after selection
 - Loading skeletons, empty state, and error messages are all handled
 
 ---
 
 ## Tech stack
 
-- **React 19 + TypeScript** (strict)
+- **React 19 + TypeScript** 
 - **Vite 7** — dev server and production build with gzip compression
 - **TanStack Query v5** — handles caching, deduplication, and passes the abort signal to Axios
 - **TanStack Router** — client-side routing with a typed 404 fallback
 - **Axios** — HTTP client; the abort signal from TanStack Query is forwarded straight through
 - **Zod** — validates the API response at runtime so a SWAPI schema change surfaces immediately as an error rather than broken UI
-- **Tailwind CSS v4** — custom brand theme defined in `@theme`
+- **Tailwind CSS v4** — custom brand theme defined in @theme
 - **Biome** — linting and formatting in one tool
 - **Vitest + Testing Library + MSW** — unit/integration tests with a mock API server (no real network calls in tests)
 - **Playwright** — E2E smoke tests against the running dev server
@@ -34,7 +34,7 @@ A Star Wars character search platform built with React 19 + TypeScript. Type a n
 
 ## Getting started
 
-You'll need Node 22.12.0 and npm installed.
+You'll need Node 22.12.0+ and npm installed.
 
 ```bash
 # Clone the repo and install dependencies
