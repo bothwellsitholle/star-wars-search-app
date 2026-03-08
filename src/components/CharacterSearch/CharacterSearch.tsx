@@ -15,7 +15,7 @@ export const CharacterSearch = () => {
   const [activeIndex, setActiveIndex] = useState(-1);
   const [selectedCharacter, setSelectedCharacter] = useState<Person | null>(null);
 
-  const debouncedQuery = useDebounce(inputValue, 300);
+  const debouncedQuery = useDebounce(inputValue, 100); // Ideally I would use 300ms in production, but I have reduced it to 100ms to make the request cancellation in the network tab more visible when typing.
   const inputRef = useRef<HTMLInputElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const listboxId = useId();
