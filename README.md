@@ -6,7 +6,7 @@ A Star Wars character search platform built with React 19 + TypeScript. Type a n
 
 ## What it does
 
-- Suggestions appear after 2 characters, they debounced at 300ms so the API isn't hammered on every keystroke
+- Suggestions appear after 2 characters, they debounced at 100ms so the API isn't hammered on every keystroke (this is configurable in the `useDebounce` hook and Ideally we would use 300ms in production but I have reduced it to 100ms to make the request cancellation in the network tab more visible when typing)
 - In-flight requests are cancelled automatically when the query changes so no stale results overwriting fresh ones
 - Full keyboard support: arrow keys to navigate, Enter to select, Escape to close
 - Click outside the dropdown to dismiss it
@@ -34,7 +34,7 @@ A Star Wars character search platform built with React 19 + TypeScript. Type a n
 
 ## Getting started
 
-You'll need Node 22.12.0+ and npm installed.
+NB: You'll need Node 22.12.0+ and npm installed.
 
 ```bash
 # Clone the repo and install dependencies
